@@ -1,0 +1,94 @@
+[project]
+name = "saihai"
+version = "0.1.0"
+description = "Declare command line commands as typed functions and parse argv into a call."
+readme = "README.md"
+authors = [{ name = "Pierre Chat", email = "pierrechat@outlook.com" }]
+license = "MIT"
+license-files = ["LICENSE.txt"]
+requires-python = ">=3.13"
+dependencies = ["escondite>=0.1.2", "hafersack>=0.1.0", "peritype>=0.8.0"]
+
+[build-system]
+requires = ["uv_build>=0.9.23,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+package = "saihai"
+module-root = ""
+
+[dependency-groups]
+dev = ["pyright>=1.1.414", "ruff>=0.16.8"]
+test = ["pytest>=9.0.2", "pytest-cov>=7.0.0"]
+
+[tool.ruff]
+line-length = 120
+src = [""]
+
+[tool.ruff.lint]
+extend-select = [
+    "E",
+    "W",
+    "F",
+    "B",
+    "Q",
+    "I",
+    "N",
+    "RUF",
+    "UP",
+    "BLE",
+    "DTZ",
+    "ERA",
+    "FLY",
+    "FURB",
+    "LOG",
+    "PIE",
+    "PLE",
+    "SLOT",
+    "TID",
+    "YTT",
+    "ASYNC",
+    "C4",
+    "G",
+    "PERF",
+    "PGH",
+    "PT",
+    "RET",
+    "RSE",
+    "T20",
+]
+fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["I001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+xfail_strict = true
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["saihai"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.pyright]
+include = ["saihai", "tests"]
+pythonVersion = "3.13"
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "strict"
+deprecateTypingAliases = true
+reportCallInDefaultInitializer = "error"
+reportImplicitOverride = "error"
+reportPropertyTypeMismatch = "error"
+reportUninitializedInstanceVariable = "error"
+reportUnnecessaryTypeIgnoreComment = "error"
+reportUnreachable = "error"
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+reportUninitializedInstanceVariable = "none"
+reportDeprecated = "none"
